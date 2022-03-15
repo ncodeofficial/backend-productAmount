@@ -51,4 +51,9 @@ gradle-app.setting
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 
+# 설정 파일
+*.properties
+*.yml
+*.prefs
+
 # End of https://www.toptal.com/developers/gitignore/api/java,gradle

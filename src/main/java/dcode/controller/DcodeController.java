@@ -3,6 +3,7 @@ package dcode.controller;
 import dcode.model.request.ProductInfoRequest;
 import dcode.model.response.ProductAmountResponse;
 import dcode.service.ProductService;
+import io.micrometer.core.instrument.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,17 +23,18 @@ public class DcodeController {
     public ResponseEntity<ProductAmountResponse> getProductAmount() {
 
         ProductAmountResponse response = service.getProductAmount(getParam());
+        HttpStatus status = StringUtils.isEmpty(response.getErrorMessage())? HttpStatus.OK : HttpStatus.BAD_REQUEST;
 
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(response, status);
     }
 
     private ProductInfoRequest getParam(){
-        int[] couponIds = {1,2};
+        int[] couponIds = {3,4};
 
         ProductInfoRequest request = ProductInfoRequest.builder()
-                .productId(1)
-                .couponIds(couponIds)
-                .build();
+										                .productId(2)
+										                .couponIds(couponIds)
+										                .build();
 
         return request;
     }
