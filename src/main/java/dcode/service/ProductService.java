@@ -37,6 +37,16 @@ public class ProductService {
         int originPrice = product.getPrice();
         System.out.println("orgPrice: " + originPrice);
         
+        // 입력된 쿠폰이 없는 경우 = 일반 판매
+        if(request.getCouponIds().length == 0) {
+        	return ProductAmountResponse.builder()
+        			.productId(request.getProductId())
+        			.name(product.getName())
+        			.originPrice(originPrice)
+        			.finalPrice(originPrice)
+        			.build();
+        }
+        
         List<Promotion> promotionList = repository.getPromotion(request.getCouponIds());
         System.out.println("coupon select success");
         
