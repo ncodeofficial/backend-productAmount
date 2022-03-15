@@ -29,10 +29,10 @@ public class DcodeController {
     }
 
     private ProductInfoRequest getParam(){
-        int[] couponIds = {3,4};
+        int[] couponIds = {1,2};
 
         ProductInfoRequest request = ProductInfoRequest.builder()
-										                .productId(2)
+										                .productId(1)
 										                .couponIds(couponIds)
 										                .build();
 
