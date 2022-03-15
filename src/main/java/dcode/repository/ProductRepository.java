@@ -17,11 +17,13 @@ import lombok.RequiredArgsConstructor;
 public class ProductRepository {
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    public Product getProduct(int id) {
-        String query = "SELECT * FROM `product` WHERE id = :id ";
+    public Product getProduct(int productId) {
+        String query = "SELECT * "
+        				+ "FROM `product` "
+        				+ "WHERE id = :id";
 
         MapSqlParameterSource params = new MapSqlParameterSource();
-        params.addValue("id", id);
+        params.addValue("id", productId);
         
         try {
         	return namedParameterJdbcTemplate.queryForObject(
@@ -39,20 +41,20 @@ public class ProductRepository {
         }
     }
     
-    public List<Promotion> getPromotion(int[] ids) {
+    public List<Promotion> getPromotion(int productId, int[] couponIds) {
     	
-    	List<Integer> couponList = Arrays.stream(ids)
+    	List<Integer> couponList = Arrays.stream(couponIds)
     									.boxed()
     									.collect(Collectors.toList());
     	
     	String query = "SELECT * "
-    					+ "FROM `promotion` "
-    					+ "WHERE id in (:ids) "
-    						+ "AND now() >= use_started_at "
-    						+ "AND use_ended_at >= now() ";
+    					+ "FROM `promotion` pr INNER JOIN `promotion_products` prpd ON pr.id = prpd.promotion_id "
+    					+ "WHERE pr.id in (:ids) AND prpd.product_id = :id "
+    						+ "AND now() >= use_started_at AND use_ended_at >= now()";
     	
     	MapSqlParameterSource params = new MapSqlParameterSource();
     	params.addValue("ids", couponList);
+    	params.addValue("id", productId);
     	
     	return namedParameterJdbcTemplate.query(
     			query, 

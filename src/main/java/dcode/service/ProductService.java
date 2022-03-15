@@ -47,13 +47,13 @@ public class ProductService {
         			.build();
         }
         
-        List<Promotion> promotionList = repository.getPromotion(request.getCouponIds());
+        List<Promotion> promotionList = repository.getPromotion(request.getProductId(), request.getCouponIds());
         System.out.println("coupon select success");
         
         int finalPrice = originPrice;
         String errorMessage = null;
 
-        // 쿠폰 id 조회 성공
+        // 쿠폰 id 조회 성공(일부 또는 전체 조회 실패하는 경우: 1. 해당상품에 사용불가 / 2. 유효기간 외 / 3. 쿠폰ID가 pr 또는 prpd 테이블에 존재하지 않음)
         if(!promotionList.isEmpty()) {
         	
         	// 쿠폰 일부만 조회된 경우, 조회되지 않은 쿠폰 정보 저장
@@ -99,12 +99,16 @@ public class ProductService {
             
             discountPrice += originPriceMath.multiply(discountPercentMath).intValue();
             System.out.println( "총 할인금액: " + discountPrice );
-            System.out.println( "할인 후 금액: " + (originPrice - discountPrice));
+            
+            int afterDiscount = originPrice - discountPrice;
+            System.out.println( "할인 후 금액: " + afterDiscount);
             
             // 천단위 절사
-            BigDecimal finalPriceBase = new BigDecimal (originPrice - discountPrice);
+            BigDecimal finalPriceBase = new BigDecimal (afterDiscount);
             finalPrice = finalPriceBase.setScale(-4, RoundingMode.DOWN).intValue();
             System.out.println( "할인 후 금액(최종): " + finalPrice );
+            int deleteThousand = afterDiscount - finalPrice;
+            System.out.println( "천단위 절사(추가할인): " + deleteThousand );
             
             if(finalPrice < 10000) {
             	errorMessage = "할인 후 금액이 1만원 이상이어야 합니다.";
@@ -114,7 +118,8 @@ public class ProductService {
         			.productId(request.getProductId())
         			.name(product.getName())
         			.originPrice(originPrice)
-        			.discountPrice(originPrice - finalPrice)
+        			.discountPrice(discountPrice)
+        			.deleteThousand(deleteThousand)
         			.finalPrice(finalPrice)
         			.couponIds(request.getCouponIds())
         			.invalidCouponIds(invalidCouponIds)

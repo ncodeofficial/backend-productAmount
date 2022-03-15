@@ -15,5 +15,6 @@ public class ProductAmountResponse {
     private int productId; // 상품아이디
     private int[] couponIds; // 입력된 쿠폰
     private int[] invalidCouponIds; // 유효하지 않은 쿠폰(유효기간 아님, id 없음)
+    private int deleteThousand; // 천단위 절사금액
     private String errorMessage; // 에러 메시지
 }
