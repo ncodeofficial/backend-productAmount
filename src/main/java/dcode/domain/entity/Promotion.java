@@ -18,7 +18,7 @@ public class Promotion {
 
     //사용가능한 쿠폰인지
     public boolean isAvailable(Date now) {
-        if (now.compareTo(getUse_started_at()) > 0 && now.compareTo(getUse_ended_at()) < 0) {
+        if (now.compareTo(getUse_started_at()) >= 0 && now.compareTo(getUse_ended_at()) <= 0) {
             return true;
         }
         return false;
