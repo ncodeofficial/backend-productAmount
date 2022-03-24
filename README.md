@@ -10,27 +10,32 @@
 3. ProductId 로 product 조회
    1. 없는 Product 인 경우 핸들링
    2. 있는 Product 인 경우 continue
-4. 할인 적용
+
+5. 할인 적용
    1. 쿠폰들을 하나씩 확인하며...
    2. 쿠폰아이디로 쿠폰 정보 조회
    3. product 적용하기
    4. 적용가능한 기간인지 확인하기
    4. ***쿠폰 적용 우선순위는....?
-5. 최소 상품가격 10,000 이상인지
-6. 1000원 단위 절삭하기
-7. 리턴
+6. 최소 상품가격 10,000 이상인지
+7. 1000원 단위 절삭하기
+8. 리턴
 
 ---------
 
 ## TODO
 
+- [ ] API 통합테스트 작성하기 
 2. API RequestBody(Param) 유효성검사 (validation)
    - [ ] ProductInfoRequest 클래스 builder(생성자와) 객체 생성시 Validation
 3. ProductId 로 product 조회
    - [ ] 없는 Product 인 경우 핸들링
    - [ ] 있는 Product 인 경우 continue
-4. 할인 적용 (Service)
-   - [ ] enum으로 로직 구현...?
+4. 쿠폰적용여부체크
+    5. PromotionProducts 테이블에 Product가 등록되어잇는지 체크
+       1. product-promotion ID 미연결시 오류
+    6. 할인 적용 (Service)
+       - [ ] enum으로 로직 구현...?
 - [ ] 할인 적용 (Service)
    - [ ] 쿠폰들을 하나씩 확인하며...
    - [ ] 쿠폰아이디로 쿠폰 정보 조회
