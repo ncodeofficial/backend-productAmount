@@ -31,7 +31,7 @@ public class DcodeController {
 
         ProductInfoRequest request = ProductInfoRequest.builder()
                 .productId(1)
-                .couponIds(couponIds)
+                .promotionIds(couponIds)
                 .build();
 
         return request;
