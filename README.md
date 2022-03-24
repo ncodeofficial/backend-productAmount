@@ -26,6 +26,7 @@
 ## TODO
 
 - [x] ProductRepository 추상화
+- [x] PromotionRepository 인터페이스 생성
 - [ ] Service의 쿼리 Result 없을경우의 핸들링
 - [ ] API 통합테스트 작성하기 
 2. API RequestBody(Param) 유효성검사 (validation)
