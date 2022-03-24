@@ -28,6 +28,7 @@
 - [x] ProductRepository 추상화
 - [x] PromotionRepository 인터페이스 생성
 - [ ] Service 클래스 테스트 작성하기
+    - [ ] 없는 Product 인 경우 핸들링
 - [ ] Service 의 쿼리 Result 없을경우의 핸들링
 2. API RequestBody(Param) 유효성검사 (validation)
    - [ ] ProductInfoRequest 클래스 builder(생성자와) 객체 생성시 Validation
