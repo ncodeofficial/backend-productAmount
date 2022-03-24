@@ -40,7 +40,6 @@ class ProductServiceTest {
     var requestBody = ProductInfoRequest.builder().productId(1).couponIds(new int[]{1, 2}).build();
     // when
     when(productRepository.getProduct(requestBody.getProductId())).thenReturn(Optional.empty());
-    when(promotionRepository.getPromotionsById(any())).thenReturn(List.of());
 
     // then
     assertThrows(NoSuchProductException.class, () -> productService.getProductAmount(requestBody));
