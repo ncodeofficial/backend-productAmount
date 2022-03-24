@@ -7,5 +7,5 @@ import lombok.Data;
 @Builder
 public class ProductInfoRequest {
     private int productId;
-    private int[] promotionIds;
+    private int[] couponIds;
 }
