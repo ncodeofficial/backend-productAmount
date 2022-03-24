@@ -8,7 +8,7 @@
 1. API Request 수신 (ProductId와 PromotionID 목록을 수신)
 2. RequestBody(Param) 유효성검사
 3. ProductId 로 product 조회
-   1. 없는 Product 인 경우 핸들링
+   1. 없는 Product 인 경우 핸들링 (EmptyResultDataAccessException 핸들링)
    2. 있는 Product 인 경우 continue
 
 5. 할인 적용
@@ -25,6 +25,8 @@
 
 ## TODO
 
+- [x] ProductRepository 추상화
+- [ ] Service의 쿼리 Result 없을경우의 핸들링
 - [ ] API 통합테스트 작성하기 
 2. API RequestBody(Param) 유효성검사 (validation)
    - [ ] ProductInfoRequest 클래스 builder(생성자와) 객체 생성시 Validation
