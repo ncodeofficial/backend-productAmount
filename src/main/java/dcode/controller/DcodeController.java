@@ -6,9 +6,7 @@ import dcode.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,19 +16,19 @@ public class DcodeController {
     private final ProductService service;
 
     //상품 가격 추출 api
-    @GetMapping("/product-amount")
-    public ResponseEntity<ProductAmountResponse> getProductAmount() {
+    @GetMapping("/product-amount/{id}")
+    public ResponseEntity<ProductAmountResponse> getProductAmount(@PathVariable int id) {
 
-        ProductAmountResponse response = service.getProductAmount(getParam());
+        ProductAmountResponse response = service.getProductAmount(getParam(id));
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    private ProductInfoRequest getParam(){
+    private ProductInfoRequest getParam(int id){
         int[] couponIds = {1,2};
 
         ProductInfoRequest request = ProductInfoRequest.builder()
-                .productId(1)
+                .productId(id)
                 .couponIds(couponIds)
                 .build();
 
