@@ -20,8 +20,6 @@ public class ProductService {
     private final PromotionRepository promotionRepository;
 
     public ProductAmountResponse getProductAmount(@Valid ProductInfoRequest request){
-        System.out.println("상품 가격 추출 로직을 완성 시켜주세요.");
-
         Product originalProduct = productRepository.getProduct(request.getProductId()).orElseThrow(NoSuchProductException::new);
         List<Promotion> promotions = promotionRepository.getPromotionsByProductIdAndPromotionId(originalProduct.getId(), request.getPromotionIds());
         Product newProduct = originalProduct.deepCopy();
