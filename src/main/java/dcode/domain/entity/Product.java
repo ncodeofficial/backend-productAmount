@@ -12,8 +12,12 @@ public class Product {
     private String name;
     private int price;
 
-    public void applyPromotion(List<Promotion> promotions){
+    public void applyPromotions(List<Promotion> promotions){
+        promotions.stream().forEach(this::applyPromotion);
+    }
 
+    private void applyPromotion(Promotion promotion) {
+       price = promotion.applyTo(price);
     }
 
     public Product deepCopy() {
