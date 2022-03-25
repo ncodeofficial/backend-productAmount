@@ -1,26 +1,37 @@
 package dcode.service;
 
 import dcode.domain.entity.Product;
+import dcode.domain.entity.Promotion;
 import dcode.exception.NoSuchProductException;
 import dcode.model.request.ProductInfoRequest;
 import dcode.model.response.ProductAmountResponse;
 import dcode.repository.ProductRepository;
-import dcode.repository.ProductRepositoryImpl;
+import dcode.repository.PromotionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
 public class ProductService {
-    private final ProductRepository repository;
+    private final ProductRepository productRepository;
+    private final PromotionRepository promotionRepository;
 
     public ProductAmountResponse getProductAmount(@Valid ProductInfoRequest request){
         System.out.println("상품 가격 추출 로직을 완성 시켜주세요.");
 
-        Product product = repository.getProduct(request.getProductId()).orElseThrow(NoSuchProductException::new);
+        Product originalProduct = productRepository.getProduct(request.getProductId()).orElseThrow(NoSuchProductException::new);
+        List<Promotion> promotions = promotionRepository.getPromotionsByProductIdAndPromotionId(originalProduct.getId(), request.getPromotionIds());
+        Product newProduct = originalProduct.deepCopy();
+        newProduct.applyPromotion(promotions);
 
-        return null;
+        return ProductAmountResponse.builder()
+          .name(newProduct.getName())
+          .originPrice(originalProduct.getPrice())
+          .finalPrice(newProduct.getPrice())
+          .discountPrice(newProduct.getPrice() - originalProduct.getPrice())
+          .build();
     }
 }

@@ -2,9 +2,10 @@ package dcode.repository;
 
 import dcode.domain.entity.Promotion;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public interface PromotionRepository {
 
-  List<Promotion> getPromotionsById(List<Integer> idList);
+  List<Promotion> getPromotionsByProductIdAndPromotionId(int productId, @NotNull int[] idList);
 }
