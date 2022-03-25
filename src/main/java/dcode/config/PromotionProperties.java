@@ -7,4 +7,6 @@ import org.springframework.context.annotation.Configuration;
 public class PromotionProperties {
 
   public static final int MIN_FINAL_DISCOUNTED_PRICE = 10_000;
+
+  public static final int MIN_PRICE_UNIT = 1_000;
 }

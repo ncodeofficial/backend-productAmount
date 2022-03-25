@@ -6,6 +6,9 @@ import lombok.Data;
 
 import java.util.Date;
 
+import static dcode.config.PromotionProperties.MIN_FINAL_DISCOUNTED_PRICE;
+import static dcode.config.PromotionProperties.MIN_PRICE_UNIT;
+
 @Data
 @Builder
 public class Promotion {
@@ -21,8 +24,10 @@ public class Promotion {
     public int applyTo(int price) {
       if (isExpired() && !isStarted()) return price;
 
-     int discounted =  promotion_type.getDiscountedPrice(price, discount_value);
-      return Math.max(discounted, PromotionProperties.MIN_FINAL_DISCOUNTED_PRICE);
+      int discountedPrice =  promotion_type.getDiscountedPrice(price, discount_value);
+
+     discountedPrice = (discountedPrice/ MIN_PRICE_UNIT) * MIN_PRICE_UNIT;
+      return Math.max(discountedPrice, MIN_FINAL_DISCOUNTED_PRICE);
     }
 
     private boolean isStarted() {
