@@ -25,7 +25,7 @@ public class ProductService {
         Product originalProduct = productRepository.getProduct(request.getProductId()).orElseThrow(NoSuchProductException::new);
         List<Promotion> promotions = promotionRepository.getPromotionsByProductIdAndPromotionId(originalProduct.getId(), request.getPromotionIds());
         Product newProduct = originalProduct.deepCopy();
-        newProduct.applyPromotion(promotions);
+        newProduct.applyPromotions(promotions);
 
         return ProductAmountResponse.builder()
           .name(newProduct.getName())
