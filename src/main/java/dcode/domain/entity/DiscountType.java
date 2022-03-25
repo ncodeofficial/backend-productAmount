@@ -4,21 +4,21 @@ public enum DiscountType {
 
   WON("WON") {
     @Override
-    public int getDiscountedPrice(int originalPrice, int rate) {
-      return originalPrice - rate;
+    public int getDiscountedAmount(int originalPrice, int rate) {
+      return rate;
     }
   },
 
   PERCENT("PERCENT") {
     @Override
-    public int getDiscountedPrice(int originalPrice, int rate) {
+    public int getDiscountedAmount(int originalPrice, int rate) {
       return (originalPrice / 100) * rate;
     }
   };
 
   private String type;
 
-  public abstract int getDiscountedPrice(int originalPrice, int rate);
+  public abstract int getDiscountedAmount(int originalPrice, int rate);
 
   DiscountType(String type) {
     this.type = type;

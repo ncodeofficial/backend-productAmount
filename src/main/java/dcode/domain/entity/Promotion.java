@@ -1,6 +1,5 @@
 package dcode.domain.entity;
 
-import dcode.config.PromotionProperties;
 import lombok.Builder;
 import lombok.Data;
 
@@ -21,13 +20,9 @@ public class Promotion {
     private Date use_ended_at; // 쿠폰 사용가능 종료 기간
 
 
-    public int applyTo(int price) {
-      if (isExpired() && !isStarted()) return price;
-
-      int discountedPrice =  discount_type.getDiscountedPrice(price, discount_value);
-
-     discountedPrice = (discountedPrice/ MIN_PRICE_UNIT) * MIN_PRICE_UNIT;
-      return Math.max(discountedPrice, MIN_FINAL_DISCOUNTED_PRICE);
+    public int getDiscountedAmount(int price) {
+      if (isExpired() && !isStarted()) return 0;
+      return discount_type.getDiscountedAmount(price, discount_value);
     }
 
     private boolean isStarted() {

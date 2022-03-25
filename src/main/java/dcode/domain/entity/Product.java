@@ -1,9 +1,12 @@
 package dcode.domain.entity;
 
+import dcode.config.PromotionProperties;
 import lombok.Builder;
 import lombok.Data;
 
 import java.util.List;
+
+import static dcode.config.PromotionProperties.MIN_FINAL_DISCOUNTED_PRICE;
 
 @Data
 @Builder
@@ -13,11 +16,11 @@ public class Product {
     private int price;
 
     public void applyPromotions(List<Promotion> promotions){
-        promotions.stream().forEach(this::applyPromotion);
-    }
-
-    private void applyPromotion(Promotion promotion) {
-       price = promotion.applyTo(price);
+        int totalDiscountAmount = 0;
+        for (Promotion promotion :promotions) {
+            totalDiscountAmount += promotion.getDiscountedAmount(price);
+        }
+        price = Math.max(MIN_FINAL_DISCOUNTED_PRICE, price - totalDiscountAmount);
     }
 
     public Product deepCopy() {
