@@ -1,14 +1,15 @@
 package dcode.domain.entity;
 
-public enum PromotionType {
+public enum DiscountType {
 
-  COUPON("COUPON") {
+  WON("WON") {
     @Override
     public int getDiscountedPrice(int originalPrice, int rate) {
       return originalPrice - rate;
     }
   },
-  CODE("CODE") {
+
+  PERCENT("PERCENT") {
     @Override
     public int getDiscountedPrice(int originalPrice, int rate) {
       return (originalPrice / 100) * rate;
@@ -19,7 +20,7 @@ public enum PromotionType {
 
   public abstract int getDiscountedPrice(int originalPrice, int rate);
 
-  PromotionType(String type) {
+  DiscountType(String type) {
     this.type = type;
   }
 }
