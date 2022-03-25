@@ -1,5 +1,6 @@
 package dcode.domain.entity;
 
+import dcode.config.PromotionProperties;
 import lombok.Builder;
 import lombok.Data;
 
@@ -20,7 +21,8 @@ public class Promotion {
     public int applyTo(int price) {
       if (isExpired() && !isStarted()) return price;
 
-      return promotion_type.getDiscountedPrice(price, discount_value);
+     int discounted =  promotion_type.getDiscountedPrice(price, discount_value);
+      return Math.max(discounted, PromotionProperties.MIN_FINAL_DISCOUNTED_PRICE);
     }
 
     private boolean isStarted() {
