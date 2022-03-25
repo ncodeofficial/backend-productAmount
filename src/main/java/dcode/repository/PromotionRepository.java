@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface PromotionRepository {
 
-  List<Promotion> getPromotionsByProductIdAndPromotionId(int productId, @NotNull int[] idList);
+  List<Promotion> getPromotionsByProductIdAndPromotionId(int productId, int[] idList);
 }

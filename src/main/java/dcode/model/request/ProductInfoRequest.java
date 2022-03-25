@@ -11,7 +11,7 @@ import javax.validation.constraints.Positive;
 public class ProductInfoRequest {
 
     @Positive
-    private int productId;
+    private Integer productId;
 
     @NotNull
     private int[] promotionIds;

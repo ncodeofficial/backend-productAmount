@@ -1,9 +1,12 @@
 package dcode.controller;
 
+import dcode.exception.InvalidRequestPropertyException;
+import dcode.exception.NoSuchProductException;
 import dcode.model.request.ProductInfoRequest;
 import dcode.model.response.ProductAmountResponse;
 import dcode.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,9 +23,7 @@ public class DcodeController {
     //상품 가격 추출 api
     @GetMapping("/product-amount")
     public ResponseEntity<ProductAmountResponse> getProductAmount() {
-
         ProductAmountResponse response = service.getProductAmount(getParam());
-
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
