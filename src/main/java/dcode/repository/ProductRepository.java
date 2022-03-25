@@ -2,6 +2,7 @@ package dcode.repository;
 
 import dcode.domain.entity.Product;
 import dcode.domain.entity.Promotion;
+import dcode.domain.entity.PromotionProducts;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -46,6 +47,24 @@ public class ProductRepository {
                         .discount_value(rs.getInt("discount_value"))
                         .use_started_at(rs.getDate("use_started_at"))
                         .use_ended_at(rs.getDate("use_ended_at"))
+                        .build()
+        );
+    }
+
+    public PromotionProducts getPromotionProductes(int promotionId, int productId) {
+        String query = "SELECT * FROM `promotion_products` WHERE promotion_id = :promotionId AND product_id = :productId ";
+
+        MapSqlParameterSource params = new MapSqlParameterSource();
+        params.addValue("promotionId", promotionId);
+        params.addValue("productId", productId);
+
+        return namedParameterJdbcTemplate.queryForObject(
+                query,
+                params,
+                (rs, rowNum) -> PromotionProducts.builder()
+                        .id(rs.getInt("id"))
+                        .promotionId(rs.getInt("promotionId"))
+                        .productId(rs.getInt("productId"))
                         .build()
         );
     }
