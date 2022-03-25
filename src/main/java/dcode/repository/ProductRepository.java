@@ -4,6 +4,7 @@ import dcode.domain.entity.Product;
 import dcode.domain.entity.Promotion;
 import dcode.domain.entity.PromotionProducts;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -58,14 +59,20 @@ public class ProductRepository {
         params.addValue("promotionId", promotionId);
         params.addValue("productId", productId);
 
-        return namedParameterJdbcTemplate.queryForObject(
-                query,
-                params,
-                (rs, rowNum) -> PromotionProducts.builder()
-                        .id(rs.getInt("id"))
-                        .promotionId(rs.getInt("promotionId"))
-                        .productId(rs.getInt("productId"))
-                        .build()
-        );
+        // 할인적용상품이 아닌경우 null 을 반환
+        try {
+            PromotionProducts promotionProducts = namedParameterJdbcTemplate.queryForObject(
+                    query,
+                    params,
+                    (rs, rowNum) -> PromotionProducts.builder()
+                            .id(rs.getInt("id"))
+                            .promotionId(rs.getInt("promotion_id"))
+                            .productId(rs.getInt("product_id"))
+                            .build()
+            );
+            return promotionProducts;
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 }
