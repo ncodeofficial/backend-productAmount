@@ -10,6 +10,14 @@ spring:
     username: sa
     password:
     driverClassName: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+    open-in-view: false
 
   # H2 Settings
   h2:
@@ -20,4 +28,6 @@ spring:
   logging:
     level:
       org:
+        hibernate.SQL: debug
         springframework.web: debug
+

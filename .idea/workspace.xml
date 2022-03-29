@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="aa284db9-a362-4f27-b545-6430a7d5e63d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/backend-productAmount.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/dcode/DcodeApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/dcode/DcodeApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/dcode/config/H2Runner.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/dcode/config/H2Runner.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/dcode/controller/DcodeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/dcode/controller/DcodeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/dcode/domain/entity/Product$ProductBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/dcode/domain/entity/Product$ProductBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/dcode/domain/entity/Product.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/dcode/domain/entity/Product.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/dcode/model/request/ProductInfoRequest$ProductInfoRequestBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/dcode/model/request/ProductInfoRequest$ProductInfoRequestBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/dcode/model/request/ProductInfoRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/dcode/model/request/ProductInfoRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/dcode/model/response/ProductAmountResponse$ProductAmountResponseBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/dcode/model/response/ProductAmountResponse$ProductAmountResponseBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/dcode/model/response/ProductAmountResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/dcode/model/response/ProductAmountResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/dcode/repository/ProductRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/dcode/repository/ProductRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/dcode/service/ProductService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/dcode/service/ProductService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/application-dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/hsqldb/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/hsqldb/data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/hsqldb/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/hsqldb/schema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dcode/controller/DcodeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dcode/controller/DcodeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dcode/domain/entity/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dcode/domain/entity/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dcode/domain/entity/Promotion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dcode/domain/entity/Promotion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dcode/domain/entity/PromotionProducts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dcode/domain/entity/PromotionProducts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dcode/model/response/ProductAmountResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dcode/model/response/ProductAmountResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dcode/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dcode/service/ProductService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application-dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/hsqldb/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/hsqldb/data.sql" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="26uLb065guRjQBKl1yeOkWDuDle" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RunManager" selected="Spring Boot.DcodeApplication">
+    <configuration name="ProductServiceTest (1)" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;dcode.ProductServiceTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="ProductServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;dcode.product.ProductServiceTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="ProductServiceTest.만원미만" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;dcode.product.ProductServiceTest.만원미만&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="ProductServiceTest.가격조회_쿠폰미적용" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;dcode.product.ProductServiceTest.가격조회_쿠폰미적용&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="ProductServiceTest.가격조회_쿠폰적용" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;dcode.product.ProductServiceTest.가격조회_쿠폰적용&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="DcodeApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="product_amount.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="dcode.DcodeApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.ProductServiceTest" />
+        <item itemvalue="Gradle.ProductServiceTest.만원미만" />
+        <item itemvalue="Gradle.ProductServiceTest.가격조회_쿠폰미적용" />
+        <item itemvalue="Gradle.ProductServiceTest.가격조회_쿠폰적용" />
+        <item itemvalue="Gradle.ProductServiceTest (1)" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="aa284db9-a362-4f27-b545-6430a7d5e63d" name="Changes" comment="" />
+      <created>1648268592322</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1648268592322</updated>
+      <workItem from="1648268594742" duration="2760000" />
+      <workItem from="1648362552681" duration="26110000" />
+      <workItem from="1648400314807" duration="1179000" />
+      <workItem from="1648428836143" duration="38488000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
