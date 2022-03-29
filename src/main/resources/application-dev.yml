@@ -10,6 +10,9 @@ spring:
     username: sa
     password:
     driverClassName: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
 
   # H2 Settings
   h2:
