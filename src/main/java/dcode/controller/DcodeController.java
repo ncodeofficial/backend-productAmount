@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/dcode")
@@ -23,11 +26,12 @@ public class DcodeController {
 
         ProductAmountResponse response = service.getProductAmount(getParam());
 
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        // return new ResponseEntity<>(response, HttpStatus.OK);
+        return ResponseEntity.ok(response);
     }
 
     private ProductInfoRequest getParam(){
-        int[] couponIds = {1,2};
+        List<Integer> couponIds = Arrays.asList(1, 2);
 
         ProductInfoRequest request = ProductInfoRequest.builder()
                 .productId(1)
