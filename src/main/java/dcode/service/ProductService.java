@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -29,14 +30,19 @@ public class ProductService {
         List<Integer> promotionIdList = promotionProductRepository.getPromotionIdList(request.getProductId());
         List<Promotion> promotionList = promotionRepository.getPromotionList(promotionIdList);
         int discountPrice = 0;
-
         for (Promotion promotion : promotionList) {
+            Date promotionStartDate = promotion.getUse_started_at();
+            Date promotionEndDate = promotion.getUse_ended_at();
             switch (promotion.getDiscount_type()) {
                 case "WON":
-                    discountPrice += promotion.getDiscount_value();
+                    if (isAvailableCoupon(promotionStartDate, promotionEndDate)) {
+                        discountPrice += promotion.getDiscount_value();
+                    }
                     break;
                 case "PERCENT":
-                    discountPrice += (product.getPrice() * promotion.getDiscount_value() / 100);
+                    if (isAvailableCoupon(promotionStartDate, promotionEndDate)) {
+                        discountPrice += (product.getPrice() * promotion.getDiscount_value() / 100);
+                    }
                     break;
                 default:
                     break;
@@ -50,5 +56,10 @@ public class ProductService {
                 .build();
         log.info(">>> response: " + response.toString());
         return response;
+    }
+
+    public boolean isAvailableCoupon(Date startDate, Date endDate) {
+        Date today = new Date();
+        return today.after(startDate) && today.before(endDate);
     }
 }
