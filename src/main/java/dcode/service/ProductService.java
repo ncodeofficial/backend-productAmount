@@ -34,7 +34,7 @@ public class ProductService {
 			.orElseThrow(() -> new EntityNotFoundException(PRODUCT_NOT_FOUND.getMessage()));
 
 		final int originPrice = product.getPrice();
-		final int discountPrice = discount(request.getCouponIds(), product, originPrice);
+		final int discountPrice = discount(request.getCouponIds(), product);
 
 		return ProductAmountResponse.builder()
 			.finalPrice(calculateFinalPrice(originPrice, discountPrice))
@@ -44,7 +44,8 @@ public class ProductService {
 			.build();
 	}
 
-	private int discount(List<Integer> couponIds, Product product, int originPrice) {
+	private int discount(List<Integer> couponIds, Product product) {
+		final int originPrice = product.getPrice();
 		int discountPrice = 0;
 
 		for (Integer couponId : couponIds) {
