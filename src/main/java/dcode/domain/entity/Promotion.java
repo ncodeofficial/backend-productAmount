@@ -1,6 +1,7 @@
 package dcode.domain.entity;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -41,6 +42,7 @@ public class Promotion {
 	@Column(name = "use_ended_at")
 	private Date useEndedAt; // 쿠폰 사용가능 종료 기간
 
+	@Builder
 	public Promotion(PromotionType promotionType, DiscountType discountType, String name, int discountValue,
 		Date useStartedAt, Date useEndedAt) {
 		this.promotionType = promotionType;
