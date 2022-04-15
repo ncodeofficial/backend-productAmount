@@ -1,12 +1,35 @@
 package dcode.domain.entity;
 
-import lombok.Builder;
-import lombok.Data;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-@Data
-@Builder
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@Entity
+@Table(name = "promotion_products")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PromotionProducts {
-    private int id;
-    private int promotionId;
-    private int productId;
+
+    @Id
+    private Integer id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "promotion_id")
+    private Promotion promotion;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
+    private Product product;
+
+    public PromotionProducts(Promotion promotion, Product product) {
+        this.promotion = promotion;
+        this.product = product;
+    }
 }
