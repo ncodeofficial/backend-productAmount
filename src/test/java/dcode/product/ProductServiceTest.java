@@ -12,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.function.Executable;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -27,6 +28,7 @@ import dcode.model.response.ProductAmountResponse;
 import dcode.repository.ProductJpaRepository;
 import dcode.repository.PromotionJpaRepository;
 import dcode.repository.PromotionProductsJpaRepository;
+import dcode.service.ErrorMessages;
 import dcode.service.ProductService;
 
 @ExtendWith(MockitoExtension.class)
@@ -66,8 +68,10 @@ class ProductServiceTest {
 			.couponIds(List.of(1, 2))
 			.build();
 
-		mockPromotion(1, PromotionType.COUPON, "30000원 할인쿠폰", 30000, DiscountType.WON);
-		mockPromotion(2, PromotionType.CODE, "15% 할인코드", 15, DiscountType.PERCENT);
+		mockPromotion(1, PromotionType.COUPON, "30000원 할인쿠폰", 30000, DiscountType.WON, Date.valueOf("2022-02-01"),
+			Date.valueOf("3023-05-01"));
+		mockPromotion(2, PromotionType.CODE, "15% 할인코드", 15, DiscountType.PERCENT, Date.valueOf("2022-02-01"),
+			Date.valueOf("3023-05-01"));
 
 		// when
 		final ProductAmountResponse response = productService.getProductAmount(request);
@@ -86,8 +90,10 @@ class ProductServiceTest {
 			.couponIds(List.of(1, 2))
 			.build();
 
-		mockPromotion(1, PromotionType.COUPON, "180000원 할인쿠폰", 180000, DiscountType.WON);
-		mockPromotion(2, PromotionType.CODE, "15% 할인코드", 15, DiscountType.PERCENT);
+		mockPromotion(1, PromotionType.COUPON, "180000원 할인쿠폰", 180000, DiscountType.WON, Date.valueOf("2022-02-01"),
+			Date.valueOf("3023-05-01"));
+		mockPromotion(2, PromotionType.CODE, "15% 할인코드", 15, DiscountType.PERCENT, Date.valueOf("2022-02-01"),
+			Date.valueOf("3023-05-01"));
 
 		// when
 		final ProductAmountResponse response = productService.getProductAmount(request);
@@ -97,14 +103,34 @@ class ProductServiceTest {
 		assertThat(response.getDiscountPrice()).isEqualTo(212250);
 	}
 
-	Promotion mockPromotion(Integer id, PromotionType promotionType, String name, int discountValue, DiscountType discountType) {
+	@Test
+	@DisplayName("상품 가격 조회_사용 기간이 아닌 프로모션 사용")
+	void getProductAmount_ExpiredPromotion() throws Exception {
+		// given
+		final ProductInfoRequest request = ProductInfoRequest.builder()
+			.productId(1)
+			.couponIds(List.of(1, 2))
+			.build();
+
+		mockPromotion(1, PromotionType.COUPON, "180000원 할인쿠폰", 180000, DiscountType.WON, Date.valueOf("2022-02-01"),
+			Date.valueOf("2022-04-01"));
+
+		// when
+		final Executable executable = () -> productService.getProductAmount(request);
+
+		// then
+		assertThrows(IllegalArgumentException.class, executable, ErrorMessages.PROMOTION_INVALID_PERIOD.getMessage());
+	}
+
+	Promotion mockPromotion(Integer id, PromotionType promotionType, String name, int discountValue,
+		DiscountType discountType, Date userStartedAt, Date useEndedAt) {
 		final Promotion promotion = Promotion.builder()
 			.promotionType(promotionType)
 			.name(name)
 			.discountType(discountType)
 			.discountValue(discountValue)
-			.useStartedAt(Date.valueOf("2022-02-01"))
-			.useEndedAt(Date.valueOf("2022-03-01"))
+			.useStartedAt(userStartedAt)
+			.useEndedAt(useEndedAt)
 			.build();
 		ReflectionTestUtils.setField(promotion, "id", id);
 		doReturn(Optional.of(promotion)).when(promotionRepository).findById(id);
