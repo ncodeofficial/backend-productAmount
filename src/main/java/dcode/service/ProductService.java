@@ -2,6 +2,7 @@ package dcode.service;
 
 import static dcode.service.ErrorMessages.*;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
@@ -47,12 +48,17 @@ public class ProductService {
 	private int discount(List<Integer> couponIds, Product product) {
 		final int originPrice = product.getPrice();
 		int discountPrice = 0;
+		final Date now = new Date();
 
 		for (Integer couponId : couponIds) {
 			final Promotion promotion = promotionRepository.findById(couponId)
 				.orElseThrow(() -> new EntityNotFoundException(PROMOTION_NOT_FOUND.getMessage()));
 			promotionProductsRepository.findByProductAndPromotion(product, promotion)
 				.orElseThrow(() -> new EntityNotFoundException(PROMOTION_PRODUCT_NOT_FOUND.getMessage()));
+
+			if (now.before(promotion.getUseStartedAt()) || now.after(promotion.getUseEndedAt())) {
+				throw new IllegalArgumentException(PROMOTION_INVALID_PERIOD.getMessage());
+			}
 
 			final PromotionType promotionType = promotion.getPromotionType();
 			final int discountValue = promotion.getDiscountValue();
