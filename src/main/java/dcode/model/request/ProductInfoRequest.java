@@ -8,6 +8,6 @@ import java.util.List;
 @Data
 @Builder
 public class ProductInfoRequest {
-    private int productId;
+    private Integer productId;
     private List<Integer> couponIds;
 }
