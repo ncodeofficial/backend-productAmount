@@ -15,9 +15,6 @@ public class H2Runner implements ApplicationRunner {
     @Autowired
     DataSource dataSource;
 
-    @Autowired
-    JdbcTemplate jdbcTemplate;
-
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
