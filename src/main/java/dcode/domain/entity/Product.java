@@ -1,12 +1,22 @@
 package dcode.domain.entity;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
-@Data
+import javax.persistence.*;
+
 @Builder
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
 public class Product {
-    private int id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
     private String name;
+
     private int price;
+
 }
