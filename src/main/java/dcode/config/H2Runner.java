@@ -7,26 +7,27 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
+
 import java.sql.Connection;
 
 @Component
 public class H2Runner implements ApplicationRunner {
 
-    @Autowired
-    DataSource dataSource;
+	@Autowired
+	DataSource dataSource;
 
-    @Autowired
-    JdbcTemplate jdbcTemplate;
+	@Autowired
+	JdbcTemplate jdbcTemplate;
 
-    @Override
-    public void run(ApplicationArguments args) throws Exception {
+	@Override
+	public void run(ApplicationArguments args) throws Exception {
 
-        try(Connection connection = dataSource.getConnection()){
-            System.out.println(connection);
-            String URL = connection.getMetaData().getURL();
-            System.out.println(URL);
-            String User = connection.getMetaData().getUserName();
-            System.out.println(User);
-        }
-    }
+		try (Connection connection = dataSource.getConnection()) {
+			System.out.println(connection);
+			String URL = connection.getMetaData().getURL();
+			System.out.println(URL);
+			String User = connection.getMetaData().getUserName();
+			System.out.println(User);
+		}
+	}
 }
