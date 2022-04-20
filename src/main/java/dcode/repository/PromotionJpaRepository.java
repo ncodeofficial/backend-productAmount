@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface PromotionJpaRepository extends JpaRepository<Promotion, Integer> {
 
-    @Query("SELECT p FROM Promotion p INNER JOIN PromotionProducts pp ON pp.promotion.id =:promotionId AND pp.product.id =:productId AND p.id=pp.id")
+    @Query("SELECT p FROM Promotion p INNER JOIN PromotionProducts pp ON pp.promotion.id =:promotionId AND pp.product.id =:productId AND p.id=pp.promotion.id")
     Promotion findPromotion(@Param("productId") int productId, @Param("promotionId") Integer promotionId);
 
 }
