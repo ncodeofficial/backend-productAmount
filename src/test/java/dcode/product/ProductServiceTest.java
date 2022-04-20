@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,13 +55,10 @@ class ProductServiceTest {
 			.build();
 		ReflectionTestUtils.setField(product, "id", 1);
 		doReturn(Optional.of(product)).when(productRepository).findById(any(Integer.class));
-
-		doReturn(Optional.of(mock(PromotionProducts.class))).when(promotionProductsRepository)
-			.findByProductAndPromotion(any(Product.class), any(Promotion.class));
 	}
 
 	@Test
-	@DisplayName("상품 가격 조회")
+	@DisplayName("상품 가격 조회_프로모션 적용")
 	void getProductAmount() throws Exception {
 		// given
 		final ProductInfoRequest request = ProductInfoRequest.builder()
@@ -72,6 +70,8 @@ class ProductServiceTest {
 			Date.valueOf("3023-05-01"));
 		mockPromotion(2, PromotionType.CODE, "15% 할인코드", 15, DiscountType.PERCENT, Date.valueOf("2022-02-01"),
 			Date.valueOf("3023-05-01"));
+		doReturn(Optional.of(mock(PromotionProducts.class))).when(promotionProductsRepository)
+			.findByProductAndPromotion(any(Product.class), any(Promotion.class));
 
 		// when
 		final ProductAmountResponse response = productService.getProductAmount(request);
@@ -79,6 +79,22 @@ class ProductServiceTest {
 		// then
 		assertThat(response.getFinalPrice()).isEqualTo(152000);
 		assertThat(response.getDiscountPrice()).isEqualTo(62250);
+	}
+	@Test
+	@DisplayName("상품 가격 조회_프로모션 미적용")
+	void getProductAmount_NotPromote() throws Exception {
+		// given
+		final ProductInfoRequest request = ProductInfoRequest.builder()
+			.productId(1)
+			.couponIds(new ArrayList<>())
+			.build();
+
+		// when
+		final ProductAmountResponse response = productService.getProductAmount(request);
+
+		// then
+		assertThat(response.getFinalPrice()).isEqualTo(215000);
+		assertThat(response.getDiscountPrice()).isEqualTo(0);
 	}
 
 	@Test
@@ -94,6 +110,8 @@ class ProductServiceTest {
 			Date.valueOf("3023-05-01"));
 		mockPromotion(2, PromotionType.CODE, "15% 할인코드", 15, DiscountType.PERCENT, Date.valueOf("2022-02-01"),
 			Date.valueOf("3023-05-01"));
+		doReturn(Optional.of(mock(PromotionProducts.class))).when(promotionProductsRepository)
+			.findByProductAndPromotion(any(Product.class), any(Promotion.class));
 
 		// when
 		final ProductAmountResponse response = productService.getProductAmount(request);
@@ -114,6 +132,8 @@ class ProductServiceTest {
 
 		mockPromotion(1, PromotionType.COUPON, "180000원 할인쿠폰", 180000, DiscountType.WON, Date.valueOf("2022-02-01"),
 			Date.valueOf("2022-04-01"));
+		doReturn(Optional.of(mock(PromotionProducts.class))).when(promotionProductsRepository)
+			.findByProductAndPromotion(any(Product.class), any(Promotion.class));
 
 		// when
 		final Executable executable = () -> productService.getProductAmount(request);
