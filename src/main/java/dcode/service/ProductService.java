@@ -24,7 +24,7 @@ import org.springframework.stereotype.Service;
 public class ProductService {
 
 	private final int MINIMUM_PRODUCT_PRICE = 10000; // 할인이 적용된 최소 상품 금액
-	private final int CUTTING_PRICE = 1000;			 // 최종 상품 금액 절삭 단위
+	private final int CUTTING_PRICE = 1000;             // 최종 상품 금액 절삭 단위
 
 	private final ProductJpaRepository productRepository;
 	private final PromotionJpaRepository promotionRepository;
@@ -76,8 +76,11 @@ public class ProductService {
 	private int calculateFinalPrice(int originPrice, int discountPrice) {
 		int finalPrice = originPrice - discountPrice;
 
-		finalPrice = finalPrice / CUTTING_PRICE * CUTTING_PRICE;
-		finalPrice = Math.max(finalPrice, MINIMUM_PRODUCT_PRICE);
+		final boolean isDiscounted = discountPrice > 0;
+		if (isDiscounted) {
+			finalPrice = finalPrice / CUTTING_PRICE * CUTTING_PRICE;
+			finalPrice = Math.max(finalPrice, MINIMUM_PRODUCT_PRICE);
+		}
 
 		return finalPrice;
 	}
