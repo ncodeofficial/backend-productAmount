@@ -6,9 +6,13 @@ import dcode.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
@@ -19,8 +23,7 @@ public class DcodeController {
 
     //상품 가격 추출 api
     @GetMapping("/product-amount")
-    public ResponseEntity<ProductAmountResponse> getProductAmount() {
-
+    public ResponseEntity<ProductAmountResponse> getProductAmount(@Valid @RequestParam ProductInfoRequest productInfoRequest) {
         ProductAmountResponse response = service.getProductAmount(getParam());
 
         return new ResponseEntity<>(response, HttpStatus.OK);
