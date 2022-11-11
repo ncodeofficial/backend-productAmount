@@ -36,7 +36,7 @@ class ProductServiceTest {
     void test() {
         int[] couponIds = {1, 2};
         ProductInfoRequest request = ProductInfoRequest.builder()
-                .productId(1)
+                .productId(3)
                 .couponIds(couponIds)
                 .build();
         System.out.println(request);

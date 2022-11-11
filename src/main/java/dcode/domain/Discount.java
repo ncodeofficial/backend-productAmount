@@ -11,8 +11,6 @@ import java.util.List;
 
 @Slf4j
 public class Discount {
-    private static final int MIN_PRICE = 10000;
-    private static final int PRICE_WON = 1000;
     private final List<Promotion> discountList;
 
     public Discount(List<Promotion> discountList, int size) {
@@ -22,32 +20,20 @@ public class Discount {
         this.discountList = discountList;
     }
 
-    public int calculate(Product product) {
-        int beforePrice = product.getPrice();
+    public Price calculate(Product product) {
+        Price price = new Price(product.getPrice());
         for (Promotion promotion : discountList) {
-            int afterPrice = validUsableCoupon(promotion, beforePrice);
-            if (afterPrice < MIN_PRICE) {
-                break;
-            }
-            beforePrice = afterPrice;
+            validUsableCoupon(promotion,price);
         }
-        return priceRoundWon(beforePrice);
+        return price;
     }
 
-    private int validUsableCoupon(Promotion promotion, int beforePrice) {
+    private Price validUsableCoupon(Promotion promotion, Price price) {
         if (!promotion.isUsableCoupon(getDateNow())) {
             throw new IllegalArgumentException("쿠폰기간이 잘못되었습니다.");
         }
-        return calculatePromotionType(promotion, beforePrice);
-    }
-
-    private int calculatePromotionType(Promotion promotion, int beforePrice) {
-        PromotionType promotionType = PromotionType.getExpression(promotion.getPromotion_type());
-        return promotionType.calculate(beforePrice, promotion.getDiscount_value());
-    }
-
-    private int priceRoundWon(int price) {
-        return price / PRICE_WON * PRICE_WON;
+        price.calculatePrice(promotion);
+        return price;
     }
 
     private LocalDate getDateNow() {

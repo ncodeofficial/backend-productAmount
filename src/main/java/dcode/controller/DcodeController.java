@@ -24,9 +24,7 @@ public class DcodeController {
     //상품 가격 추출 api
     @GetMapping("/product-amount")
     public ResponseEntity<ProductAmountResponse> getProductAmount(@Valid @RequestParam ProductInfoRequest productInfoRequest) {
-        ProductAmountResponse response = service.getProductAmount(getParam());
-
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return service.getProductAmount(getParam());
     }
 
     private ProductInfoRequest getParam(){
