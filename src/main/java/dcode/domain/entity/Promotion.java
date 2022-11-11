@@ -3,14 +3,20 @@ package dcode.domain.entity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Data
+@Entity
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Promotion {
+    @Id
     private int id;
     private String promotion_type; //쿠폰 타입 (쿠폰, 코드)
     private String name;

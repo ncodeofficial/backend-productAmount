@@ -1,4 +1,4 @@
-package dcode.repository;
+package dcode.repository.jdbc;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;

@@ -4,16 +4,18 @@ import dcode.domain.Discount;
 import dcode.domain.Price;
 import dcode.domain.Promotions;
 import dcode.domain.entity.Product;
+import dcode.domain.entity.Promotion;
 import dcode.model.request.ProductInfoRequest;
 import dcode.model.response.ProductAmountResponse;
-import dcode.repository.ProductRepository;
-import dcode.repository.PromotionProductsRepository;
-import dcode.repository.PromotionRepository;
+import dcode.repository.jpa.ProductJPARepository;
+import dcode.repository.jpa.PromotionJPARepository;
+import dcode.repository.jpa.PromotionProductsJPARepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
@@ -25,44 +27,55 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 @Validated
+@Transactional(readOnly = true)
 public class ProductService {
-    private final ProductRepository productRepository;
-    private final PromotionProductsRepository promotionProductsRepository;
-    private final PromotionRepository promotionRepository;
+    private final ProductJPARepository productJPARepository;
+    private final PromotionJPARepository promotionJPARepository;
+    private final PromotionProductsJPARepository promotionProductsJPARepository;
 
     public ResponseEntity<ProductAmountResponse> getProductAmount(@Valid ProductInfoRequest request) {
-        Product product = productRepository.getProduct(request.getProductId());
-        if (product == null) {
-            return new ResponseEntity("사용자를 찾을수 없습니다.", HttpStatus.BAD_REQUEST);
-        }
+        Product product = productJPARepository.findById(request.getProductId()).orElseThrow(() -> {
+            throw new IllegalArgumentException("사용자를 찾을 수 없습니다.");
+        });
 
-        if (request.getCouponIds().length > 0) {
-            try {
-                List<Integer> coupons = Arrays.stream(request.getCouponIds()).boxed().collect(Collectors.toList());
+        if (request.getCouponIds() != null) {
+            List<Integer> coupons = Arrays.stream(request.getCouponIds()).boxed().collect(Collectors.toList());
 
-                Promotions promotions = new Promotions(promotionProductsRepository.getPromotionProducts(product.getId()));
+            Promotions promotions = new Promotions(
+                    promotionProductsJPARepository.findAllByProductId(product.getId())
+                            .orElseThrow(
+                                    () -> {
+                                        throw new IllegalArgumentException("관련된 프로모션을 찾을 수 없습니다.");
+                                    }
+                            ));
 
-                if (promotions.isApplicableCoupon(coupons)) {
-                    Discount discount = new Discount(promotionRepository.getPromotions(coupons), coupons.size());
+            if (promotions.isApplicableCoupon(coupons)) {
+                List<Promotion> promotionAllById = promotionJPARepository.findAllById(coupons);
+                if (promotionAllById.size() > 0) {
+                    Discount discount = new Discount(promotionAllById, coupons.size());
                     Price price = discount.calculate(product);
-                    log.info("price ::: {}", price);
-                    return new ResponseEntity<>(ProductAmountResponse.builder()
+
+                    ProductAmountResponse result = ProductAmountResponse.builder()
                             .name(product.getName())
                             .originPrice(price.getOriginPrice())
                             .discountPrice(price.getDiscountPrice())
                             .finalPrice(price.getFinalPrice())
-                            .build(), HttpStatus.OK);
+                            .build();
+
+                    log.info("result ::: {}", result);
+
+                    return new ResponseEntity<>(result, HttpStatus.OK);
 
                 }
-            }catch (Exception e){
-                return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+                throw new IllegalArgumentException("쿠폰에 해당하는 프로모션을 찾을 수 없습니다.");
             }
-
         }
 
-        return new ResponseEntity<>(ProductAmountResponse.builder()
+        ProductAmountResponse result = ProductAmountResponse.builder()
                 .name(product.getName())
                 .originPrice(product.getPrice())
-                .build(), HttpStatus.OK);
+                .build();
+        log.info("result ::: {}", result);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

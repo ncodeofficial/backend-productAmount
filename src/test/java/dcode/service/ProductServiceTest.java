@@ -6,15 +6,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.validation.UnexpectedTypeException;
+import javax.validation.ConstraintViolationException;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-@Transactional
 class ProductServiceTest {
     @Autowired
     ProductService productService;
@@ -26,9 +24,7 @@ class ProductServiceTest {
                 .productId(0)
                 .couponIds(couponIds)
                 .build();
-        assertThatThrownBy(() -> {
-            productService.getProductAmount(request);
-        }).isInstanceOf(UnexpectedTypeException.class);
+        assertThatThrownBy(() -> productService.getProductAmount(request)).isInstanceOf(ConstraintViolationException.class);
 
     }
 
@@ -36,10 +32,10 @@ class ProductServiceTest {
     void test() {
         int[] couponIds = {1, 2};
         ProductInfoRequest request = ProductInfoRequest.builder()
-                .productId(3)
+                .productId(1)
                 .couponIds(couponIds)
                 .build();
         System.out.println(request);
-            productService.getProductAmount(request);
+        productService.getProductAmount(request);
     }
 }

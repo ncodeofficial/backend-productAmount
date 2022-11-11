@@ -1,4 +1,4 @@
-package dcode.repository;
+package dcode.repository.jdbc;
 
 import dcode.domain.entity.Promotion;
 import lombok.RequiredArgsConstructor;
