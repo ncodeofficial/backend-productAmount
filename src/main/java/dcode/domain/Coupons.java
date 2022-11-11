@@ -1,6 +1,5 @@
 package dcode.domain;
 
-import dcode.constant.PromotionType;
 import dcode.domain.entity.Product;
 import dcode.domain.entity.Promotion;
 import lombok.extern.slf4j.Slf4j;
@@ -10,25 +9,25 @@ import java.time.ZoneId;
 import java.util.List;
 
 @Slf4j
-public class Discount {
-    private final List<Promotion> discountList;
+public class Coupons {
+    private final List<Promotion> couponList;
 
-    public Discount(List<Promotion> discountList, int size) {
-        if (discountList.size() != size) {
+    public Coupons(List<Promotion> couponList, int size) {
+        if (couponList.size() != size) {
             throw new IllegalArgumentException("사용할 수 없는 쿠폰이 존재합니다");
         }
-        this.discountList = discountList;
+        this.couponList = couponList;
     }
 
     public Price calculate(Product product) {
         Price price = new Price(product.getPrice());
-        for (Promotion promotion : discountList) {
-            validUsableCoupon(promotion,price);
+        for (Promotion promotion : couponList) {
+            validCoupon(promotion,price);
         }
         return price;
     }
 
-    private Price validUsableCoupon(Promotion promotion, Price price) {
+    private Price validCoupon(Promotion promotion, Price price) {
         if (!promotion.isUsableCoupon(getDateNow())) {
             throw new IllegalArgumentException("쿠폰기간이 잘못되었습니다.");
         }

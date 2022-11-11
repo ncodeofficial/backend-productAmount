@@ -1,7 +1,6 @@
 package dcode.domain;
 
 import dcode.constant.PromotionType;
-import dcode.domain.entity.Product;
 import dcode.domain.entity.Promotion;
 
 public class Price {
